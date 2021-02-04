@@ -1,0 +1,105 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="c3302779_Assig1.Site" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <!-- Meta details -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%: Page.Title %> - JerseyZone</title>
+
+    <!-- Stylesheets -->
+    <link href="UL/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="UL/CSS/style.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+
+    <!-- Tab icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="UL/IMG/jerseyzone-icon.ico" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- home link -->
+            <asp:HyperLink runat="server" class="nav-link" NavigateUrl="~/UL/Home.aspx">JerseyZone</asp:HyperLink>
+
+            <!-- collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <asp:HyperLink runat="server" ID="userAbout" class="nav-link" NavigateUrl="~/UL/About.aspx" Visible="true">About Us</asp:HyperLink>
+                    </li>
+      
+                    <li class="nav-item">
+                        <asp:HyperLink runat="server" ID="userContact" class="nav-link" NavigateUrl="~/UL/Contact.aspx" Visible="true">Contact Us</asp:HyperLink>
+                    </li>
+      
+                    <li class="nav-item">
+                        <asp:HyperLink runat="server" ID="userProducts" class="nav-link" NavigateUrl="~/UL/Products.aspx" Visible="true">Products</asp:HyperLink>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li>
+                        <asp:HyperLink runat="server" ID="userLoggedOut">
+                            <asp:LinkButton class="nav-link" runat="server" Text="Login" Onclick="UserLogIn"/> 
+                        </asp:HyperLink>
+                    </li>
+                     
+                     <!-- user can use account, if session is not null -->
+                    <asp:HyperLink runat="server" ID="userLoggedIn" Visible="false"> 
+                        <!-- account landing link -->
+                        <asp:HyperLink runat="server" class="nav-link" NavigateUrl="~/UL/User.aspx" title="Account"><%: Session["UserAccount"].ToString() %></asp:HyperLink>
+
+                        <!-- log out of session link -->
+                        <asp:LinkButton runat="server" class="nav-link" Text="Logout" OnClick="UserLogOut" CausesValidation="false" />
+                    </asp:HyperLink>
+                     
+                     <!-- shopping cart -->
+                    <li>
+                        <asp:HyperLink class="nav-link" runat="server" ID="userShoppingCart" Visible="true" NavigateUrl="~/UL/Cart.aspx">Shopping Cart</asp:HyperLink>         
+                    </li>
+
+                     <!-- admin section -->
+                     <!-- log in link is at the bottom -->
+                     <!-- user can use account, if session is not null -->
+                    <asp:HyperLink runat="server" ID="adminLoggedIn" Visible="false">
+                         <!-- account landing link -->
+                        <asp:HyperLink runat="server" class="nav-link" NavigateUrl="~/UL/AdminAccount.aspx" title="Account"><%: Session["AdminAccount"].ToString() %></asp:HyperLink>
+
+                        <!-- log out of session link -->
+                        <asp:LinkButton runat="server" class="nav-link" Text="Logout" OnClick="AdminLogOut" CausesValidation="false" />
+                    </asp:HyperLink>
+                </ul>
+            </div>
+        </nav>
+
+        <!--body content container-->
+        <div class="container-fluid">
+            <div class="container body-content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+             </div>
+        </div>
+
+        
+        
+        <!-- copyright -->
+        <div class="footer-copyright text-center py-3">
+            <!-- this is where the admin logs in... for now -->
+            <p>&copy; JerseyZone</p>
+        </div>
+    </form>
+</body>
+</html>
